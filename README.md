@@ -22,15 +22,11 @@ Usage
 
 ##### General Usage:
 
-    $ ./run.php [--onlySystems="..."] [--level="..."] [--baseDir="..."]
+    $ ./run.php [--onlySystems="..."] [--baseDir="..."]
 
 ##### onlySystems
 
 If set not all possible systems will be used to search and displayed, but only those that are mentioned here. This value can be comma separated and contains the identifier of the runners.
-
-##### level
-
-This is how many times /* should be added after baseDir to allow deeper searchings.
 
 ##### baseDir
 
