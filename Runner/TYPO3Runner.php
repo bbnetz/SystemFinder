@@ -26,7 +26,7 @@ class TYPO3Runner extends AbstractRunner{
 	 * @return void
 	 */
 	public function run($directory) {
-		$founds = glob($directory . '/typo3conf');
+		$founds = $this->findDirectory($directory, 'typo3conf');
 		foreach($founds as $found) {
 			$this->fetchSingle($found);
 		}

@@ -28,15 +28,6 @@ class Run{
 	protected $baseDir = '.';
 
 	/**
-	 * level
-	 * @var int $level
-	 * Variable to add '*' level to search
-	 * If $baseDir is /var/www/ and $level is 2
-	 * will create /var/www/ * / * /
-	 */
-	protected $level = 2;
-
-	/**
 	 * onlySystems
 	 * @var array $onlySystems
 	 * If variable is not empty registerSystem is filtered agains this
@@ -83,7 +74,7 @@ class Run{
 	 * @return void
 	 */
 	public function setBaseDir($baseDir) {
-		$this->baseDir = $baseDir . str_repeat('/*' , $this->level);
+		$this->baseDir = $baseDir;
 	}
 
 	/**
@@ -98,15 +89,11 @@ class Run{
 				'',
 				'baseDir::',
 				'onlySystems::',
-				'level::',
 			)
 		);
 
 		if(isset($ops['onlySystems']))
 			\BbNetz\Run::setOnlySystems($ops['onlySystems']);
-
-		if(isset($ops['level']))
-			$this->level = (int)$ops['level'];
 
 		if(isset($ops['baseDir']))
 			$this->setBaseDir($ops['baseDir']);

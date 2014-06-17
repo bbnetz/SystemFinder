@@ -3,6 +3,8 @@ SystemFinder
 
 Script to automatically find all installed systems on your server
 
+** Only working with *nix right now as system command `find` is required **
+
 What it does
 ------------
 
@@ -37,8 +39,7 @@ This is where the search should start. At first this is `.`, which means the cur
 Known Issues / Missing Features
 ---
 
-* Currently --recursive is missing
-* New folder to add unversionized Runner
+* No features are currently missing. Yeay!
 
 
 Special Thanks

@@ -59,4 +59,32 @@ abstract class AbstractRunner {
 	protected function formatOutput($version, $directory) {
 		echo '[' . static::$identifier . '] ' . $version . ' - ' . $directory . PHP_EOL;
 	}
+
+	/**
+	 * function findDirectory
+	 * Working recursive through all directories under $directoryBase for directory named $directory
+	 *
+	 * @param string $directoryBase
+	 * @param string $directory
+	 * @return array
+	 */
+	protected function findDirectory($directoryBase, $directory) {
+		$return = array();
+		exec("find " . $directoryBase . " -type d -name '" . $directory . "' 2> /dev/null", $return);
+		return $return;
+	}
+
+	/**
+	 * function findFiles
+	 * Working recursive through all directories under $directoryBase for file named $file
+	 *
+	 * @param string $directoryBase
+	 * @param string $file
+	 * @return array
+	 */
+	protected function findFiles($directoryBase, $file) {
+		$return = array();
+		system("find " . $directoryBase . " -type f -name '" . $file . "' 2> /dev/null", $return);
+		return $return;
+	}
 }
