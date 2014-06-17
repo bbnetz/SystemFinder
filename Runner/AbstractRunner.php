@@ -86,7 +86,7 @@ abstract class AbstractRunner {
 	 */
 	protected function findFiles($directoryBase, $file) {
 		$return = array();
-		system("find " . $directoryBase . " -type f -name '" . $file . "' 2> /dev/null", $tmp);
+		exec("find " . $directoryBase . " -type f -name '" . $file . "' 2> /dev/null", $tmp);
 		foreach($tmp as $r)
 			$return[] = str_replace($file, '', $r);
 		return $return;
