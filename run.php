@@ -113,6 +113,9 @@ class Run{
 
 		foreach (glob("Runner/*Runner.php") as $filename)
 			require_once $filename;
+
+		foreach (glob("MyRunner/*Runner.php") as $filename)
+			require_once $filename;
 	}
 
 	/**
