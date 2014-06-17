@@ -10,12 +10,14 @@ What it does
 
 This small script is crawling over your server and trying to find all systems. Each System has its own worker all workers are own PHP Classes to make it pretty easy to add a system you wrote for yourself.
 
-**Currently known systems:**
+** Currently known systems: **
 
-* TYPO3
-* Wordpress
+* Gallery3
 * MediaWiki
-
+* PhpMyAdmin
+* TYPO3 CMS
+* TYPO3 FLOW
+* Wordpress
 
 Usage
 ---
