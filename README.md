@@ -13,8 +13,8 @@ This small script is crawling over your server and trying to find all systems. E
 **Currently known systems:**
 
 * TYPO3
-* Wordpress - in Work
-* MediaWiki - in Work
+* Wordpress
+* MediaWiki
 
 
 Usage
