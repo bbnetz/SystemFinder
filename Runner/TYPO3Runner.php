@@ -40,7 +40,7 @@ class TYPO3Runner extends AbstractRunner{
 	 * @return string
 	 */
 	protected function fetchVersion($singleDirectory) {
-		return $this->getSingleVersion(str_replace('typo3conf', '', $singleDirectory));
+		return $this->getSingleVersion($singleDirectory);
 	}
 
 	/**

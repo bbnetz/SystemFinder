@@ -70,7 +70,9 @@ abstract class AbstractRunner {
 	 */
 	protected function findDirectory($directoryBase, $directory) {
 		$return = array();
-		exec("find " . $directoryBase . " -type d -name '" . $directory . "' 2> /dev/null", $return);
+		exec("find " . $directoryBase . " -type d -name '" . $directory . "' 2> /dev/null", $tmp);
+		foreach($tmp as $r)
+			$return[] = str_replace($directory, '', $r);
 		return $return;
 	}
 
@@ -84,7 +86,9 @@ abstract class AbstractRunner {
 	 */
 	protected function findFiles($directoryBase, $file) {
 		$return = array();
-		system("find " . $directoryBase . " -type f -name '" . $file . "' 2> /dev/null", $return);
+		system("find " . $directoryBase . " -type f -name '" . $file . "' 2> /dev/null", $tmp);
+		foreach($tmp as $r)
+			$return[] = str_replace($file, '', $r);
 		return $return;
 	}
 }
