@@ -15,6 +15,7 @@ This small script is crawling over your server and trying to find all systems. E
 * Gallery3
 * MediaWiki
 * PhpMyAdmin
+* Symfony 2
 * TYPO3 CMS
 * TYPO3 FLOW
 * Wordpress
