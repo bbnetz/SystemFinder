@@ -18,15 +18,18 @@ class SymfonyRunner extends AbstractRunner{
 	 */
 	public static $identifier = 'Symfony';
 
+
 	/**
 	 * function run
 	 * Doing a single Run to fetch all Symfonys
-	 * 
+	 *
 	 *
 	 * @param string $directory
+	 * @param bool   $showExtensions
+	 *
 	 * @return void
 	 */
-	public function run($directory) {
+	public function run($directory, $showExtensions = false) {
 		$founds = $this->findDirectory($directory, 'Symfony');
 		foreach($founds as $found)
 			if(strstr($found, 'vendor/symfony/symfony/src/'))
@@ -51,6 +54,11 @@ class SymfonyRunner extends AbstractRunner{
 			$version = 'NO VERSION';
 		}
 		return $version;
+	}
+
+
+	protected function fetchExtensions($singleDirectory) {
+		return false;
 	}
 }
 

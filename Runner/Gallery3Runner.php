@@ -18,14 +18,17 @@ class Gallery3Runner extends AbstractRunner{
 	 */
 	public static $identifier = 'Gallery3';
 
+
 	/**
 	 * function run
 	 * Doing a single Run to fetch all Gallery3s
 	 *
 	 * @param string $directory
+	 * @param bool   $showExtensions
+	 *
 	 * @return void
 	 */
-	public function run($directory) {
+	public function run($directory, $showExtensions = false) {
 		$founds = $this->findFiles($directory, 'gallery_theme.php');
 		foreach($founds as $found) {
 			$this->fetchSingle(str_replace('modules/gallery/helpers/', '', $found));
@@ -52,6 +55,10 @@ class Gallery3Runner extends AbstractRunner{
 		return $version;
 	}
 
+
+	protected function fetchExtensions($singleDirectory) {
+		return false;
+	}
 }
 
 \BbNetz\Run::registerSystem(new Gallery3Runner());

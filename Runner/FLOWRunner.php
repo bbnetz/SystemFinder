@@ -18,14 +18,17 @@ class FLOWRunner extends AbstractRunner{
 	 */
 	public static $identifier = 'FLOW';
 
+
 	/**
 	 * function run
 	 * Doing a single Run to fetch all FLOWs
 	 *
 	 * @param string $directory
+	 * @param bool   $showExtensions
+	 *
 	 * @return void
 	 */
-	public function run($directory) {
+	public function run($directory, $showExtensions = false) {
 		$founds = $this->findFiles($directory, 'flow.bat');
 		foreach($founds as $found) {
 			if(stristr($found, 'Packages/Framework/TYPO3.Flow/Resources/Private/Installer/Distribution/Defaults'))
@@ -54,6 +57,10 @@ class FLOWRunner extends AbstractRunner{
 		return $version;
 	}
 
+
+	protected function fetchExtensions($singleDirectory) {
+		return false;
+	}
 }
 
 \BbNetz\Run::registerSystem(new FLOWRunner());

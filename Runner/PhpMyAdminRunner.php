@@ -18,14 +18,17 @@ class PhpMyAdminRunner extends AbstractRunner{
 	 */
 	public static $identifier = 'PhpMyAdmin';
 
+
 	/**
 	 * function run
 	 * Doing a single Run to fetch all PhpMyAdmin
 	 *
 	 * @param string $directory
+	 * @param bool   $showExtensions
+	 *
 	 * @return void
 	 */
-	public function run($directory) {
+	public function run($directory, $showExtensions = false) {
 		$founds = $this->findFiles($directory, 'phpmyadmin.css.php');
 		foreach($founds as $found)
 			$this->fetchSingle($found);
@@ -55,6 +58,11 @@ class PhpMyAdminRunner extends AbstractRunner{
 			$version = 'NO VERSION'; 
 		}
 		return $version;
+	}
+
+
+	protected function fetchExtensions($singleDirectory) {
+		return false;
 	}
 }
 

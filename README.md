@@ -25,7 +25,7 @@ Usage
 
 ##### General Usage:
 
-    $ ./run.php [--onlySystems="..."] [--baseDir="..."]
+    $ ./run.php [--onlySystems="..."] [--baseDir="..."] [--showExtensions]
 
 ##### onlySystems
 
@@ -34,6 +34,10 @@ If set not all possible systems will be used to search and displayed, but only t
 ##### baseDir
 
 This is where the search should start. At first this is `.`, which means the current dir.
+
+##### showExtensions
+
+Lists all available Extensions with their according version
 
 Known Issues / Missing Features
 ---

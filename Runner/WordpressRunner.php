@@ -18,14 +18,17 @@ class WordpressRunner extends AbstractRunner{
 	 */
 	public static $identifier = 'Wordpress';
 
+
 	/**
 	 * function run
 	 * Doing a single Run to fetch all Wordpress
 	 *
 	 * @param string $directory
+	 * @param bool   $showExtensions
+	 *
 	 * @return void
 	 */
-	public function run($directory) {
+	public function run($directory, $showExtensions = false) {
 		$founds = $this->findDirectory($directory, 'wp-content');
 		foreach($founds as $found)
 			$this->fetchSingle($found);
@@ -45,6 +48,11 @@ class WordpressRunner extends AbstractRunner{
 		$version = $matches[1];
 		unset($versionFile);
 		return $version;
+	}
+
+
+	protected function fetchExtensions($singleDirectory) {
+		return false;
 	}
 }
 
