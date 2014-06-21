@@ -40,7 +40,11 @@ class TYPO3Runner extends AbstractRunner{
 	 * @return string
 	 */
 	protected function fetchVersion($singleDirectory) {
-		return $this->getSingleVersion($singleDirectory);
+		try {
+			return $this->getSingleVersion($singleDirectory);
+		} catch (\Exception $e) {
+			return $e->getMessage();
+		}
 	}
 
 	/**
@@ -57,11 +61,11 @@ class TYPO3Runner extends AbstractRunner{
 		}elseif(file_exists($found . '/typo3/sysext/core/Classes/Core/SystemEnvironmentBuilder.php')){
 			$content = file_get_contents($found . '/typo3/sysext/core/Classes/Core/SystemEnvironmentBuilder.php');
 		}else{
-			throw new Exception('Version not found for ' . $found);
+			throw new \Exception('Version not found for ' . $found);
 		}
 		if(preg_match("/TYPO_VERSION\s*=\s*'(.*)';/", $content, $match) != 1) {
 			if(preg_match("/define\('TYPO3_version', (.*)\)/", $content, $match) != 1)
-				throw new Exception('Version not found for ' . $found);
+				throw new \Exception('Version not found for ' . $found);
 		}
 		$version = trim($match[1]);
 		$version = str_replace("'", '', $version);
