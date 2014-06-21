@@ -18,11 +18,14 @@ abstract class AbstractRunner {
 	 */
 	public static $identifier = 'Abstract';
 
+
 	/**
 	 * function run
 	 * Doing a single Run to fetch all Systems of current run
 	 *
 	 * @param string $directory
+	 * @param bool   $showExtensions
+	 *
 	 * @return void
 	 */
 	public abstract function run($directory, $showExtensions = false);
