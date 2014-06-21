@@ -30,9 +30,15 @@ class Run{
 	/**
 	 * onlySystems
 	 * @var array $onlySystems
-	 * If variable is not empty registerSystem is filtered agains this
+	 * If variable is not empty registerSystem is filtered against this
 	 */
 	protected static $onlySystems = array();
+
+	/**
+	 *
+	 * @var bool
+	 */
+	protected $showExtensions = false;
 
 	/**
 	 * function registerSystem
@@ -77,11 +83,15 @@ class Run{
 		$this->baseDir = $baseDir;
 	}
 
+	public function setShowExtensions($showExtensions) {
+		$this->showExtensions = $showExtensions;
+	}
+
 	/**
 	 * function __construct
-	 * Constructing all required Settings and Importing Runners 
+	 * Constructing all required Settings and Importing Runners
 	 *
-	 * @return void
+	 * @return \BbNetz\Run
 	 */
 	public function __construct() {
 		$ops = getopt('',
@@ -89,6 +99,7 @@ class Run{
 				'',
 				'baseDir::',
 				'onlySystems::',
+				'showExtensions::',
 			)
 		);
 
@@ -97,6 +108,9 @@ class Run{
 
 		if(isset($ops['baseDir']))
 			$this->setBaseDir($ops['baseDir']);
+
+		if(isset($ops['showExtensions']))
+			$this->setShowExtensions(true);
 
 		foreach (glob("Runner/*Runner.php") as $filename)
 			require_once $filename;
@@ -113,7 +127,8 @@ class Run{
 	 */
 	public function run() {
 		foreach(\BbNetz\Run::$systems as $system)
-			$system->run($this->baseDir);	}
+			$system->run($this->baseDir, $this->showExtensions);
+	}
 
 }
 

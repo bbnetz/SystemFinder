@@ -18,14 +18,17 @@ class MediaWikiRunner extends AbstractRunner{
 	 */
 	public static $identifier = 'MediaWiki';
 
+
 	/**
 	 * function run
 	 * Doing a single Run to fetch all MediaWikis
 	 *
 	 * @param string $directory
+	 * @param bool   $showExtensions
+	 *
 	 * @return void
 	 */
-	public function run($directory) {
+	public function run($directory, $showExtensions = false) {
 		$founds = $this->findDirectory($directory, 'mw-config');
 		foreach($founds as $found)
 			$this->fetchSingle($found);
@@ -45,6 +48,11 @@ class MediaWikiRunner extends AbstractRunner{
 		$version = $matches[1];
 		unset($versionFile);
 		return $version;
+	}
+
+
+	protected function fetchExtensions($singleDirectory) {
+		return false;
 	}
 }
 

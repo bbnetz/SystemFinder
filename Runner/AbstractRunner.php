@@ -25,7 +25,7 @@ abstract class AbstractRunner {
 	 * @param string $directory
 	 * @return void
 	 */
-	public abstract function run($directory);
+	public abstract function run($directory, $showExtensions = false);
 
 	/**
 	 * function fetchVersion
@@ -37,6 +37,17 @@ abstract class AbstractRunner {
 	 */
 	protected abstract function fetchVersion($singleDirectory);
 
+
+	/**
+	 * function fetchExtensions
+	 * Getting Systems Extensions like plugins, themes, etc
+	 *
+	 * @param $singleDirectory
+	 * @return mixed
+	 * @abstract
+	 */
+	protected abstract function fetchExtensions($singleDirectory);
+
 	/**
 	 * function fetchSingle
 	 * After finding entries in run this method should be called for each single found
@@ -47,6 +58,7 @@ abstract class AbstractRunner {
 	protected function fetchSingle($singleDirectory) {
 		$this->formatOutput($this->fetchVersion($singleDirectory), $singleDirectory);
 	}
+
 
 	/**
 	 * function formatOutput
