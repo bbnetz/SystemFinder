@@ -75,21 +75,27 @@ abstract class AbstractRunner {
 		echo '[' . static::$identifier . '] ' . $version . ' - ' . $directory . PHP_EOL;
 	}
 
+
 	/**
 	 * function findDirectory
 	 * Working recursive through all directories under $directoryBase for directory named $directory
+	 * Follows symlinks
 	 *
 	 * @param string $directoryBase
 	 * @param string $directory
+	 * @param bool   $followSymlinks
+	 *
 	 * @return array
 	 */
-	protected function findDirectory($directoryBase, $directory) {
+	protected function findDirectory($directoryBase, $directory, $followSymlinks = true) {
+		$followSymlinks = $followSymlinks ? '-follow' : '';
 		$return = array();
-		exec("find " . $directoryBase . " -type d -name '" . $directory . "' 2> /dev/null", $tmp);
+		exec("find " . $directoryBase . " -type d -name '" . $directory . "' $followSymlinks 2> /dev/null", $tmp);
 		foreach($tmp as $r)
 			$return[] = str_replace($directory, '', $r);
 		return $return;
 	}
+
 
 	/**
 	 * function findFiles
@@ -97,11 +103,14 @@ abstract class AbstractRunner {
 	 *
 	 * @param string $directoryBase
 	 * @param string $file
+	 * @param        $followSymlinks
+	 *
 	 * @return array
 	 */
-	protected function findFiles($directoryBase, $file) {
+	protected function findFiles($directoryBase, $file, $followSymlinks = true) {
+		$followSymlinks = $followSymlinks ? '-follow' : '';
 		$return = array();
-		exec("find " . $directoryBase . " -type f -name '" . $file . "' 2> /dev/null", $tmp);
+		exec("find " . $directoryBase . " -type f -name '" . $file . "' $followSymlinks 2> /dev/null", $tmp);
 		foreach($tmp as $r)
 			$return[] = str_replace($file, '', $r);
 		return $return;
