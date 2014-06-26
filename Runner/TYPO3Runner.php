@@ -19,17 +19,6 @@ class TYPO3Runner extends AbstractRunner{
 	public static $identifier = 'TYPO3';
 
 	/**
-	 * @var boolean $warnModified if enabled will warn modifiedExtensions
-	 */
-	protected $warnModified = false;
-
-	/**
-	 * @var boolean $ignoreModified if enabled will ignore all modifiedExtensions in insecureSearch and outdatedSearch
-	 */
-	protected $ignoreModified = false;
-
-
-	/**
 	 * function run
 	 * Doing a single Run to fetch all TYPO3s
 	 *
@@ -165,16 +154,9 @@ class TYPO3Runner extends AbstractRunner{
 			preg_match('/\'version\'\s*=>\s*\'(.*?)\'/', $content, $found);
 			$extensionName = str_replace($singleDirectory.'typo3conf/ext/', '', str_replace('/ext_emconf.php', '', $extFile));
 			$extensionVersion = $this->calcVersion($found[1]);
-			preg_match('/\'_md5_values_when_last_written\'\s*=>\s*\'(.*?)\'/', $content, $foundMd5);
-			if(isset($foundMd5[1])) {
-				$extensionMd5 = $foundMd5[1];
-			}else{
-				$extensionMd5 = false;
-			}
+
 			if($extensionVersion !== false) {
-				$return[$extensionName] = array($extensionVersion, $found[1], $this->checkMd5($extFile, $extensionMd5));
-				if($this->warnModified && $return[$extensionName][2] && !$this->isIgnored($extensionName, $extensionVersion))
-					echo 'Modified Extension '.$extensionName.' found in '.$singleDirectory.PHP_EOL;
+				$return[$extensionName] = array($extensionVersion, $found[1]);
 			}
 		}
 		return $return;
