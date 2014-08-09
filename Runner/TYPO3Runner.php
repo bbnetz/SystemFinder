@@ -23,16 +23,19 @@ class TYPO3Runner extends AbstractRunner{
 	 * Doing a single Run to fetch all TYPO3s
 	 *
 	 * @param string $directory
-	 * @param bool   $showExtensions
-	 *
+	 * @param boolean $showExtensions
 	 * @return void
 	 */
 	public function run($directory, $showExtensions = false) {
 		$founds = $this->findDirectory($directory, 'typo3conf');
 		foreach($founds as $found) {
-			$this->fetchSingle($found);
-			if ($showExtensions) {
-				$this->formatExtensionOutput($this->fetchExtensions($found));
+			try {
+				$this->fetchSingle($found);
+				if ($showExtensions) {
+					$this->formatExtensionOutput($this->fetchExtensions($found));
+				}
+			} catch(\Exception $e) {
+				$this->formatOutput('Possible Found', $found);
 			}
 		}
 	}
@@ -58,7 +61,6 @@ class TYPO3Runner extends AbstractRunner{
 	 * Checks for each TYPO3 Installation the current version number
 	 *
 	 * @param string $found
-	 *
 	 * @throws \Exception
 	 * @link https://github.com/bbnetz/TYPO3Updater/blob/master/update.php
 	 * @return string Version Number of current Path
@@ -117,7 +119,7 @@ class TYPO3Runner extends AbstractRunner{
 		$md5 = unserialize($md5);
 		$ext = str_replace('ext_emconf.php', '', $ext);
 		foreach($md5 as $file => $hash) {
-			if(file_exists($ext.$file) && $hash != substr(md5(file_get_contents($ext.$file)), 0, 4)) {
+			if(file_exists($ext . $file) && $hash != substr(md5(file_get_contents($ext . $file)), 0, 4)) {
 				return true;
 			}
 		}
@@ -129,12 +131,11 @@ class TYPO3Runner extends AbstractRunner{
 	 * Echoing Informations about extension and version
 	 *
 	 * @param array $elements
-	 *
 	 * @return void
 	 */
 	protected function formatExtensionOutput(array $elements) {
 		foreach($elements as $key => $element) {
-			echo "\t".$key.' '.$element[1].PHP_EOL;
+			echo "\t" . $key . ' ' . $element[1] . PHP_EOL;
 		}
 	}
 
@@ -142,17 +143,17 @@ class TYPO3Runner extends AbstractRunner{
 	 * function fetchExtensions
 	 * Getting Systems Extensions like plugins, themes, etc
 	 *
-	 * @param $singleDirectory
+	 * @param string $singleDirectory
 	 * @return mixed
 	 * @abstract
 	 */
 	protected function fetchExtensions($singleDirectory) {
-		$extensions = glob($singleDirectory.'typo3conf/ext/*/ext_emconf.php');
+		$extensions = glob($singleDirectory . 'typo3conf/ext/*/ext_emconf.php');
 		$return = array();
 		foreach($extensions as $extFile) {
 			$content = file_get_contents($extFile);
 			preg_match('/\'version\'\s*=>\s*\'(.*?)\'/', $content, $found);
-			$extensionName = str_replace($singleDirectory.'typo3conf/ext/', '', str_replace('/ext_emconf.php', '', $extFile));
+			$extensionName = str_replace($singleDirectory . 'typo3conf/ext/', '', str_replace('/ext_emconf.php', '', $extFile));
 			$extensionVersion = $this->calcVersion($found[1]);
 
 			if($extensionVersion !== false) {
