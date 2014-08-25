@@ -21,6 +21,11 @@ This small script is crawling over your server and trying to find all systems. E
 * Wordpress
 * Joomla
 * Piwik
+* Mantis
+* MySQLDumper
+* Redaxo
+* WBBLite2 / 4
+* Moodle
 
 Usage
 ---
