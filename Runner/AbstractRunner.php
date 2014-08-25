@@ -59,7 +59,18 @@ abstract class AbstractRunner {
 	 * @return void
 	 */
 	protected function fetchSingle($singleDirectory) {
-		$this->formatOutput($this->fetchVersion($singleDirectory), $singleDirectory);
+		$this->formatOutput($this->fetchVersion($singleDirectory), $this->adjustDirectoryPath($singleDirectory));
+	}
+
+	/**
+	 * function adjustDirectoryPath
+	 * If Runner need to digg deep we are able to adjust the displayed path with this function
+	 *
+	 * @param string $singleDirectory
+	 * @return string
+	 */
+	protected function adjustDirectoryPath($singleDirectory) {
+		return $singleDirectory;
 	}
 
 
